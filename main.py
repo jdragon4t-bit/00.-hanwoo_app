@@ -28,11 +28,7 @@ if not st.session_state["logged_in"]:
         if st.button("로그인하기", use_container_width=True):
             # [수정] 농가별 고유 비밀번호 장부 만들기
             # 나중에는 이 정보가 데이터베이스(DB)로 들어갑니다.
-            farm_passwords = {
-                "": "beef77",   # 대박농장 비밀번호
-                "행복축산": "cow1234",  # 행복축산 비밀번호
-                "미래한우": "hanwoo99"  # 미래한우 비밀번호
-            }
+            farm_passwords = st.secrets["passwords"]
             
             # 1. 관리자 로그인 검사
             if user_id == "관리자" and user_pw == "0000":
@@ -76,7 +72,7 @@ else:
     # 1. 관리자로 로그인했을 때
     if st.session_state["user_role"] == "관리자":
         st.sidebar.markdown("😎 **관리자 모드**로 접속 중")
-        selected_farm = st.sidebar.selectbox("컨설팅할 농장 선택:", ["국인성농장", "행복축산", "미래한우"])
+        selected_farm = st.sidebar.selectbox("컨설팅할 농장 선택:", ["국인성", "행복축산", "미래한우"])
         menu = st.sidebar.radio("페이지 이동:", ["홈 (안내)", "농가별 리포트", "사진 자료실"])
     
     # 2. 일반 농가로 로그인했을 때 (자기 농장 이름 고정, 메뉴 제한)
