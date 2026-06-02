@@ -2,6 +2,20 @@ import streamlit as st
 import os
 from PIL import Image
 
+# 이미지 파일 불러오기 (이름이 완전히 똑같아야 합니다)
+try:
+    icon_image = Image.open("hanwoo.png") 
+except:
+    icon_image = "🐂" # 파일이 없거나 에러 날 때 보여줄 기본 이모티콘
+
+# 앱 설정 맨 첫 줄에 적용
+st.set_page_config(
+    page_title="한우 컨설팅 시스템",
+    page_icon=icon_image, # 스마트폰 바탕화면 및 브라우저 탭 아이콘이 됩니다!
+    layout="wide"
+)
+
+
 # ==========================================
 # [기초 설정] 로그인 상태를 기억하기 위한 공간 만들기
 # ==========================================
