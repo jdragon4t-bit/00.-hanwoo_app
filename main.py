@@ -1,17 +1,19 @@
 import streamlit as st
-import os
 from PIL import Image
+import os
 
-# 이미지 파일 불러오기 (이름이 완전히 똑같아야 합니다)
-try:
-    icon_image = Image.open("hanwoo.png") 
-except:
-    icon_image = "🐂" # 파일이 없거나 에러 날 때 보여줄 기본 이모티콘
+# 1. 프로젝트 폴더 안에 logo.png 사진이 진짜 있는지 먼저 체크합니다
+if os.path.exists("hanwoo.png"):
+    # 사진이 있다면 그 사진을 읽어서 아이콘으로 씁니다 (왕관을 완벽히 대체!)
+    icon_image = Image.open("hanwoo.png")
+else:
+    # 사진 파일이 안 읽히면 임시로 소 이모티콘을 씁니다
+    icon_image = "🐂"
 
-# 앱 설정 맨 첫 줄에 적용
+# 2. 홈페이지 최상단 설정에 주입
 st.set_page_config(
     page_title="한우 컨설팅 시스템",
-    page_icon=icon_image, # 스마트폰 바탕화면 및 브라우저 탭 아이콘이 됩니다!
+    page_icon=icon_image,  # 이 자리에 이모티콘이 아닌 '사진 객체'가 들어가야 폰 아이콘이 바뀝니다!
     layout="wide"
 )
 # ==========================================
